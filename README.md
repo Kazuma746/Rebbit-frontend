@@ -6,6 +6,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### NOTION D'EXPLICATION 
+
+https://oil-sign-428.notion.site/FullStack-0f922f23c26c4482aabe075f895a530e?pvs=4
+
+(tech utilisé, logique de réfléxion)
+
 ### `npm start`
 
 Runs the app in the development mode.\
