@@ -1,15 +1,12 @@
-import React, { useContext } from 'react';
+// frontend/src/components/AdminRoute.js
+
+import React from 'react';
 import { Navigate } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 const AdminRoute = ({ children }) => {
-  const { isAuthenticated, user } = useContext(AuthContext);
-
-  if (!isAuthenticated || (user && user.role !== 'admin')) {
-    return <Navigate to="/" />;
-  }
-
-  return children;
+  const { user } = useAuth();
+  return user && user.role === 'admin' ? children : <Navigate to="/" />;
 };
 
 export default AdminRoute;

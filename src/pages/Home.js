@@ -2,15 +2,17 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, Box, Button, Card, CardContent, CardActions, IconButton, Tooltip, Select, MenuItem } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Container, Typography, Box, Card, CardContent, CardActions, IconButton, Tooltip } from '@mui/material';
 import parse from 'html-react-parser';
 import Tag from '../components/Tag';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import CommentIcon from '@mui/icons-material/Comment';
+import LinkButton from '../components/LinkButton';
+import Filters from '../components/Filters';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [sortedPosts, setSortedPosts] = useState([]);
   const [sortOrder, setSortOrder] = useState('date');
   const [filterPeriod, setFilterPeriod] = useState('all');
   const token = localStorage.getItem('token');
@@ -54,35 +56,9 @@ const Home = () => {
     setFilterPeriod(event.target.value);
   };
 
-  const filterPosts = (posts) => {
-    const now = new Date();
-    let filteredPosts = posts.filter(post => post.state === 'published');
-
-    if (filterPeriod !== 'all') {
-      filteredPosts = posts.filter(post => {
-        const postDate = new Date(post.date_created);
-        switch (filterPeriod) {
-          case 'day':
-            return (now - postDate) / (1000 * 60 * 60 * 24) <= 1;
-          case 'week':
-            return (now - postDate) / (1000 * 60 * 60 * 24 * 7) <= 1;
-          case 'month':
-            return (now - postDate) / (1000 * 60 * 60 * 24 * 30) <= 1;
-          default:
-            return true;
-        }
-      });
-    }
-
-    return filteredPosts;
+  const handleFilter = (filteredPosts) => {
+    setSortedPosts(filteredPosts);
   };
-
-  const sortedPosts = filterPosts([...posts]).sort((a, b) => {
-    if (sortOrder === 'upvotes') {
-      return b.upvotes - a.upvotes;
-    }
-    return new Date(b.date_created) - new Date(a.date_created);
-  });
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
@@ -99,45 +75,29 @@ const Home = () => {
               textAlign: 'center',
             }}
           >
-            <Button variant="contained" color="primary" component={RouterLink} to="/create-post" sx={{ mb: 2 }}>
+            <LinkButton to="/create-post" sx={{ mb: 2 }}>
               Créer un post
-            </Button>
+            </LinkButton>
           </Box>
         ) : (
           <Box>
-            <Button component={RouterLink} to="/login" variant="contained" color="primary" sx={{ m: 1 }}>
+            <LinkButton to="/login" sx={{ m: 1 }}>
               Se connecter
-            </Button>
-            <Button component={RouterLink} to="/register" variant="outlined" color="primary" sx={{ m: 1 }}>
+            </LinkButton>
+            <LinkButton to="/register" variant="outlined" sx={{ m: 1 }}>
               S'inscrire
-            </Button>
+            </LinkButton>
           </Box>
         )}
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4 }}>
-        <Select
-          value={sortOrder}
-          onChange={handleSortChange}
-          displayEmpty
-          inputProps={{ 'aria-label': 'Sort Posts' }}
-          sx={{ mb: 2, minWidth: 120 }}
-        >
-          <MenuItem value="date">Trier par date</MenuItem>
-          <MenuItem value="upvotes">Trier par upvotes</MenuItem>
-        </Select>
-        <Select
-          value={filterPeriod}
-          onChange={handleFilterChange}
-          displayEmpty
-          inputProps={{ 'aria-label': 'Filter Posts' }}
-          sx={{ mb: 2, minWidth: 120 }}
-        >
-          <MenuItem value="all">Depuis toujours</MenuItem>
-          <MenuItem value="day">Dernier jour</MenuItem>
-          <MenuItem value="week">Dernière semaine</MenuItem>
-          <MenuItem value="month">Dernier mois</MenuItem>
-        </Select>
-      </Box>
+      <Filters 
+        posts={posts}
+        sortOrder={sortOrder} 
+        filterPeriod={filterPeriod} 
+        handleSortChange={handleSortChange} 
+        handleFilterChange={handleFilterChange} 
+        onFilter={handleFilter}
+      />
       <Box>
         {sortedPosts.map((post) => (
           <Card key={post._id} sx={{ mb: 2, width: '100%' }}>
@@ -180,9 +140,9 @@ const Home = () => {
               </Box>
             </CardContent>
             <CardActions>
-              <Button component={RouterLink} to={`/posts/${post._id}`} size="small">
+              <LinkButton to={`/posts/${post._id}`} size="small">
                 Lire la suite
-              </Button>
+              </LinkButton>
             </CardActions>
           </Card>
         ))}
