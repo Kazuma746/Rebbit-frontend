@@ -1,7 +1,7 @@
 ## Frontend
 
 Frontend du projet Rebbit de Amidou DIALLO
-M1 Dev Web à Ynov Campus
+M1 Dev Web à Ynov Campus 2024
 
 # Getting Started with Create React App
 
