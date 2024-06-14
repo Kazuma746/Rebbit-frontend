@@ -20,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/posts');
+        const res = await axios.get('https://rebbit-api.marksu.fr/api/posts');
         setPosts(res.data);
       } catch (err) {
         console.error('Erreur lors de la récupération des posts', err);
@@ -35,7 +35,7 @@ const Home = () => {
 
   const handleUpvote = async (postId) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/posts/upvote/${postId}`, {}, {
+      const res = await axios.put(`https://rebbit-api.marksu.fr/api/posts/upvote/${postId}`, {}, {
         headers: {
           'x-auth-token': token,
         }

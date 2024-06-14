@@ -12,7 +12,7 @@ const UserComments = ({ userId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const commentsRes = await axios.get(`http://localhost:5000/api/users/${userId}/comments`, {
+        const commentsRes = await axios.get(`https://rebbit-api.marksu.fr/api/users/${userId}/comments`, {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         setComments(commentsRes.data);
@@ -26,7 +26,7 @@ const UserComments = ({ userId }) => {
   const handleDeleteComment = async (commentId) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/comments/${commentId}`, {
+        await axios.delete(`https://rebbit-api.marksu.fr/api/comments/${commentId}`, {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         setComments(comments.filter(comment => comment._id !== commentId));

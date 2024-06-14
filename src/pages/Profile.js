@@ -27,7 +27,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userRes = await axios.get('http://localhost:5000/api/auth/user', {
+        const userRes = await axios.get('https://rebbit-api.marksu.fr/api/auth/user', {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         setEmail(userRes.data.email);
@@ -45,7 +45,7 @@ const Profile = () => {
     }
 
     try {
-      const res = await axios.put('http://localhost:5000/api/users/pseudo', { pseudo: newPseudo }, {
+      const res = await axios.put('https://rebbit-api.marksu.fr/api/users/pseudo', { pseudo: newPseudo }, {
         headers: {
           'x-auth-token': localStorage.getItem('token')
         }
@@ -68,7 +68,7 @@ const Profile = () => {
     }
 
     try {
-      const res = await axios.put('http://localhost:5000/api/auth/change-email', { newEmail }, {
+      const res = await axios.put('https://rebbit-api.marksu.fr/api/auth/change-email', { newEmail }, {
         headers: {
           'x-auth-token': localStorage.getItem('token')
         }
@@ -91,7 +91,7 @@ const Profile = () => {
     }
 
     try {
-      const res = await axios.put('http://localhost:5000/api/auth/change-password', { currentPassword, newPassword }, {
+      const res = await axios.put('https://rebbit-api.marksu.fr/api/auth/change-password', { currentPassword, newPassword }, {
         headers: {
           'x-auth-token': localStorage.getItem('token')
         }
@@ -108,7 +108,7 @@ const Profile = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      await axios.delete('http://localhost:5000/api/auth/delete-account', {
+      await axios.delete('https://rebbit-api.marksu.fr/api/auth/delete-account', {
         headers: {
           'x-auth-token': localStorage.getItem('token')
         }

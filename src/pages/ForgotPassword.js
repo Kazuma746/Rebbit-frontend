@@ -11,7 +11,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+      const res = await axios.post('https://rebbit-api.marksu.fr/api/auth/forgot-password', { email });
       setMessage(res.data.msg);
     } catch (err) {
       console.error('Erreur:', err.message);

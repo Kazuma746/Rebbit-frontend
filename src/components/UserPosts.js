@@ -12,7 +12,7 @@ const UserPosts = ({ userId }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const postsRes = await axios.get(`http://localhost:5000/api/users/${userId}/posts`, {
+        const postsRes = await axios.get(`https://rebbit-api.marksu.fr/api/users/${userId}/posts`, {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         setPosts(postsRes.data);
@@ -26,7 +26,7 @@ const UserPosts = ({ userId }) => {
   const handleDeletePost = async (postId) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce post ?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/posts/${postId}`, {
+        await axios.delete(`https://rebbit-api.marksu.fr/api/posts/${postId}`, {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         setPosts(posts.filter(post => post._id !== postId));
@@ -38,7 +38,7 @@ const UserPosts = ({ userId }) => {
 
   const handleStatusChange = async (postId, newState) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/posts/state/${postId}`, { state: newState }, {
+      const res = await axios.put(`https://rebbit-api.marksu.fr/api/posts/state/${postId}`, { state: newState }, {
         headers: { 'x-auth-token': localStorage.getItem('token') }
       });
       setPosts(posts.map(post => post._id === postId ? { ...post, state: newState } : post));

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const deleteComment = async (commentId, token) => {
   try {
-    const res = await axios.delete(`http://localhost:5000/api/comments/${commentId}`, {
+    const res = await axios.delete(`https://rebbit-api.marksu.fr/api/comments/${commentId}`, {
       headers: {
         'x-auth-token': token,
       },

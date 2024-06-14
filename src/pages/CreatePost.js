@@ -29,7 +29,7 @@ const CreatePost = () => {
       images.forEach(image => {
         formData.append('images', image);
       });
-      const uploadRes = await axios.post('http://localhost:5000/api/upload', formData, {
+      const uploadRes = await axios.post('https://rebbit-api.marksu.fr/api/upload', formData, {
         headers: {
           'x-auth-token': token,
           'Content-Type': 'multipart/form-data'
@@ -38,7 +38,7 @@ const CreatePost = () => {
       const imageUrls = uploadRes.data.fileNames;
   
       // Create post
-      await axios.post('http://localhost:5000/api/posts', {
+      await axios.post('https://rebbit-api.marksu.fr/api/posts', {
         title,
         content,
         tags: [tag], // Utiliser un tableau avec un seul tag

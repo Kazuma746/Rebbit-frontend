@@ -16,7 +16,7 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/admin/users', {
+        const res = await axios.get('https://rebbit-api.marksu.fr/api/admin/users', {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         setUsers(res.data);
@@ -29,7 +29,7 @@ const UserList = () => {
 
   const handleDeleteUser = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/admin/users/${selectedUserId}`, {
+      await axios.delete(`https://rebbit-api.marksu.fr/api/admin/users/${selectedUserId}`, {
         headers: { 'x-auth-token': localStorage.getItem('token') }
       });
       setUsers(users.filter(user => user._id !== selectedUserId));

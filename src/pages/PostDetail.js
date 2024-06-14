@@ -18,7 +18,7 @@ const PostDetail = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/posts/${id}`);
+        const res = await axios.get(`https://rebbit-api.marksu.fr/api/posts/${id}`);
         setPost(res.data);
       } catch (err) {
         if (err.response && err.response.status === 404) {
@@ -36,7 +36,7 @@ const PostDetail = () => {
       }
 
       try {
-        const res = await axios.get('http://localhost:5000/api/auth/user', {
+        const res = await axios.get('https://rebbit-api.marksu.fr/api/auth/user', {
           headers: {
             'x-auth-token': token,
           },
@@ -55,7 +55,7 @@ const PostDetail = () => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce post ?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:5000/api/posts/${id}`, {
+        await axios.delete(`https://rebbit-api.marksu.fr/api/posts/${id}`, {
           headers: {
             'x-auth-token': token,
           },
@@ -74,7 +74,7 @@ const PostDetail = () => {
 
   const handleCommentDelete = async (commentId) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/api/comments/${commentId}`, {
+      const res = await axios.delete(`https://rebbit-api.marksu.fr/api/comments/${commentId}`, {
         headers: {
           'x-auth-token': token,
         },

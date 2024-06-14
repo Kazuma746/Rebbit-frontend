@@ -17,7 +17,7 @@ const PostContent = ({ post, user, handleDelete, handleEdit }) => {
     const fetchPostUser = async () => {
       if (post.user && typeof post.user === 'string') {
         try {
-          const res = await axios.post('http://localhost:5000/api/users/by-ids', { ids: [post.user] });
+          const res = await axios.post('https://rebbit-api.marksu.fr/api/users/by-ids', { ids: [post.user] });
           setPostUser(res.data[0]);
         } catch (err) {
           console.error('Erreur lors de la récupération de l\'utilisateur', err);
@@ -45,7 +45,7 @@ const PostContent = ({ post, user, handleDelete, handleEdit }) => {
   const handleUpvote = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.put(`http://localhost:5000/api/posts/upvote/${post._id}`, {}, {
+      const res = await axios.put(`https://rebbit-api.marksu.fr/api/posts/upvote/${post._id}`, {}, {
         headers: {
           'x-auth-token': token,
         }
@@ -99,10 +99,10 @@ const PostContent = ({ post, user, handleDelete, handleEdit }) => {
         </Box>
         {post.images && post.images.length > 0 && (
           <img 
-            src={`http://localhost:5000/uploads/${post.images[0]}`} 
+            src={`https://rebbit-api.marksu.fr/uploads/${post.images[0]}`} 
             alt="Post" 
             style={{ width: '100%', maxHeight: '400px', objectFit: 'cover', cursor: 'pointer' }} 
-            onClick={() => window.open(`http://localhost:5000/uploads/${post.images[0]}`, '_blank')} 
+            onClick={() => window.open(`https://rebbit-api.marksu.fr/uploads/${post.images[0]}`, '_blank')} 
           />
         )}
       </Box>

@@ -9,7 +9,7 @@ const UserUpvotes = ({ userId }) => {
   useEffect(() => {
     const fetchUpvotes = async () => {
       try {
-        const upvotesRes = await axios.get(`http://localhost:5000/api/users/${userId}/upvotes`, {
+        const upvotesRes = await axios.get(`https://rebbit-api.marksu.fr/api/users/${userId}/upvotes`, {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         console.log('Upvotes data:', upvotesRes.data);

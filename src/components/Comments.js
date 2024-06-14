@@ -13,7 +13,7 @@ const Comments = ({ postId, token, user, onDeleteComment }) => { // Ajout de onD
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/comments/${postId}`);
+        const res = await axios.get(`https://rebbit-api.marksu.fr/api/comments/${postId}`);
         setComments(res.data);
       } catch (err) {
         console.error('Error fetching comments:', err.response ? err.response.data : 'Network error');
@@ -28,7 +28,7 @@ const Comments = ({ postId, token, user, onDeleteComment }) => { // Ajout de onD
 
     try {
       const res = await axios.post(
-        'http://localhost:5000/api/comments',
+        'https://rebbit-api.marksu.fr/api/comments',
         { content: newComment, post: postId },
         {
           headers: {
@@ -45,7 +45,7 @@ const Comments = ({ postId, token, user, onDeleteComment }) => { // Ajout de onD
 
   const handleDeleteComment = async (commentId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/comments/${commentId}`, {
+      await axios.delete(`https://rebbit-api.marksu.fr/api/comments/${commentId}`, {
         headers: {
           'x-auth-token': token,
         }
@@ -62,7 +62,7 @@ const Comments = ({ postId, token, user, onDeleteComment }) => { // Ajout de onD
   const handleEditComment = async (commentId, content) => {
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/comments/${commentId}`,
+        `https://rebbit-api.marksu.fr/api/comments/${commentId}`,
         { content },
         {
           headers: {
@@ -83,7 +83,7 @@ const Comments = ({ postId, token, user, onDeleteComment }) => { // Ajout de onD
   const handleUpvoteComment = async (commentId) => {
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/comments/upvote/${commentId}`,
+        `https://rebbit-api.marksu.fr/api/comments/upvote/${commentId}`,
         {},
         {
           headers: {

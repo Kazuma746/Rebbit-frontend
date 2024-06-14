@@ -19,19 +19,19 @@ const UserDetail = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const userRes = await axios.get(`http://localhost:5000/api/admin/users/${id}`, {
+        const userRes = await axios.get(`https://rebbit-api.marksu.fr/api/admin/users/${id}`, {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         setUser(userRes.data);
         setPseudo(userRes.data.pseudo);
         setEmail(userRes.data.email);
 
-        const postsRes = await axios.get(`http://localhost:5000/api/admin/users/${id}/posts`, {
+        const postsRes = await axios.get(`https://rebbit-api.marksu.fr/api/admin/users/${id}/posts`, {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         setPosts(postsRes.data);
 
-        const commentsRes = await axios.get(`http://localhost:5000/api/admin/users/${id}/comments`, {
+        const commentsRes = await axios.get(`https://rebbit-api.marksu.fr/api/admin/users/${id}/comments`, {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         setComments(commentsRes.data);
@@ -44,7 +44,7 @@ const UserDetail = () => {
 
   const handleEditUser = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/admin/users/${id}`, { pseudo, email }, {
+      await axios.put(`https://rebbit-api.marksu.fr/api/admin/users/${id}`, { pseudo, email }, {
         headers: { 'x-auth-token': localStorage.getItem('token') }
       });
       setEditMode(false);
@@ -56,7 +56,7 @@ const UserDetail = () => {
   const handleDeleteComment = async (commentId) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/admin/comments/${commentId}`, {
+        await axios.delete(`https://rebbit-api.marksu.fr/api/admin/comments/${commentId}`, {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
         setComments(comments.filter(comment => comment._id !== commentId));

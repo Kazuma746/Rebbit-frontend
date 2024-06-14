@@ -18,7 +18,7 @@ const EditPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/posts/${id}`);
+        const res = await axios.get(`https://rebbit-api.marksu.fr/api/posts/${id}`);
         const post = res.data;
         setTitle(post.title);
         setContent(post.content);
@@ -38,7 +38,7 @@ const EditPost = () => {
       const token = localStorage.getItem('token');
       const formattedTags = tags.split(',').map(tag => tag.trim()); // Format tags as array
       console.log('Editing post with:', { title, content, tags: formattedTags, state }); // Log data being sent
-      const res = await axios.put(`http://localhost:5000/api/posts/${id}`, {
+      const res = await axios.put(`https://rebbit-api.marksu.fr/api/posts/${id}`, {
         title,
         content,
         tags: formattedTags,

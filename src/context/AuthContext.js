@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       const fetchUser = async () => {
         try {
-          const res = await axios.get('http://localhost:5000/api/auth/user', {
+          const res = await axios.get('https://rebbit-api.marksu.fr/api/auth/user', {
             headers: { 'x-auth-token': token }
           });
           setIsAuthenticated(true);
