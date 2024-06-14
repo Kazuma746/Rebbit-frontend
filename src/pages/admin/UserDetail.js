@@ -3,12 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Box, TextField, Button, Table, TableBody, TableCell, TableHead, TableRow, IconButton, Tooltip } from '@mui/material';
-import { Link as RouterLink, useParams, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const UserDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);

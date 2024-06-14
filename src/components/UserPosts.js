@@ -38,7 +38,7 @@ const UserPosts = ({ userId }) => {
 
   const handleStatusChange = async (postId, newState) => {
     try {
-      const res = await axios.put(`https://rebbit-api.marksu.fr/api/posts/state/${postId}`, { state: newState }, {
+      await axios.put(`https://rebbit-api.marksu.fr/api/posts/state/${postId}`, { state: newState }, {
         headers: { 'x-auth-token': localStorage.getItem('token') }
       });
       setPosts(posts.map(post => post._id === postId ? { ...post, state: newState } : post));

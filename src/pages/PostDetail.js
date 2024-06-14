@@ -74,7 +74,7 @@ const PostDetail = () => {
 
   const handleCommentDelete = async (commentId) => {
     try {
-      const res = await axios.delete(`https://rebbit-api.marksu.fr/api/comments/${commentId}`, {
+      await axios.delete(`https://rebbit-api.marksu.fr/api/comments/${commentId}`, {
         headers: {
           'x-auth-token': token,
         },
@@ -85,7 +85,6 @@ const PostDetail = () => {
       }));
     } catch (err) {
       console.error('Error deleting comment:', err.response ? err.response.data : 'Network error');
-      // alert('Erreur du serveur lors de la suppression du commentaire.');
     }
   };
 
