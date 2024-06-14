@@ -56,7 +56,7 @@ const Home = () => {
 
   const filterPosts = (posts) => {
     const now = new Date();
-    let filteredPosts = posts;
+    let filteredPosts = posts.filter(post => post.state === 'published');
 
     if (filterPeriod !== 'all') {
       filteredPosts = posts.filter(post => {

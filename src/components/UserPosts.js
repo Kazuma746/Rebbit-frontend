@@ -1,6 +1,8 @@
+// src/components/UserPosts.js  
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Container, Table, TableBody, TableCell, TableHead, TableRow, Typography, IconButton, Tooltip, Box } from '@mui/material';
+import { Container, Table, TableBody, TableCell, TableHead, TableRow, Typography, IconButton, Tooltip, Select, MenuItem } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -34,6 +36,17 @@ const UserPosts = ({ userId }) => {
     }
   };
 
+  const handleStatusChange = async (postId, newState) => {
+    try {
+      const res = await axios.put(`http://localhost:5000/api/posts/state/${postId}`, { state: newState }, {
+        headers: { 'x-auth-token': localStorage.getItem('token') }
+      });
+      setPosts(posts.map(post => post._id === postId ? { ...post, state: newState } : post));
+    } catch (err) {
+      console.error('Erreur lors de la mise à jour du post', err);
+    }
+  };
+
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
       <Typography variant="h5" component="h2" gutterBottom>
@@ -45,6 +58,7 @@ const UserPosts = ({ userId }) => {
             <TableCell>Titre</TableCell>
             <TableCell>Date</TableCell>
             <TableCell>Tags</TableCell>
+            <TableCell>État</TableCell>
             <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
@@ -58,6 +72,18 @@ const UserPosts = ({ userId }) => {
               </TableCell>
               <TableCell>{new Date(post.date_created).toLocaleDateString()}</TableCell>
               <TableCell>{post.tags.join(', ')}</TableCell>
+              <TableCell>
+                <Select
+                  value={post.state}
+                  onChange={(e) => handleStatusChange(post._id, e.target.value)}
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Changer l\'état du post' }}
+                >
+                  <MenuItem value="draft">Brouillon</MenuItem>
+                  <MenuItem value="published">Publié</MenuItem>
+                  <MenuItem value="archived">Archivé</MenuItem>
+                </Select>
+              </TableCell>
               <TableCell>
                 <Tooltip title="Supprimer">
                   <IconButton onClick={() => handleDeletePost(post._id)}>
