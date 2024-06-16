@@ -1,4 +1,4 @@
-//src/pages/CreatePost.js
+// src/pages/CreatePost.js
 
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -23,35 +23,45 @@ const CreatePost = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-  
-      // Upload images
+      
+      // Journalisation pour le débogage
+      console.log('Images sélectionnées :', images);
+
+      // Télécharger les images
       const formData = new FormData();
       images.forEach(image => {
         formData.append('images', image);
       });
+
+      console.log('FormData avant envoi :', formData);
+
       const uploadRes = await axios.post('https://rebbit-api.marksu.fr/api/upload', formData, {
         headers: {
           'x-auth-token': token,
           'Content-Type': 'multipart/form-data'
         }
       });
+
       const imageUrls = uploadRes.data.fileNames;
-  
-      // Create post
+
+      console.log('URLs des images téléchargées :', imageUrls);
+
+      // Créer le post
       await axios.post('https://rebbit-api.marksu.fr/api/posts', {
         title,
         content,
         tags: [tag], // Utiliser un tableau avec un seul tag
         state,
-        images: imageUrls // Add image URLs to the post
+        images: imageUrls // Ajouter les URLs des images au post
       }, {
         headers: {
           'x-auth-token': token
         }
       });
+
       navigate('/');
     } catch (err) {
-      console.error('Error creating post:', err.response ? err.response.data : 'Network error');
+      console.error('Erreur lors de la création du post :', err.response ? err.response.data : 'Erreur réseau');
     }
   };
 
