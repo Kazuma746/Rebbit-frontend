@@ -6,6 +6,10 @@ M1 Dev Web - Ynov Campus 2024
 Pour pallier aux problèmes de déploiement du site actuellement, j'ai préparé une vidéo de présentation pour vous en donner un aperçu :
 [BackOffice - CRUD](https://youtu.be/iJHcN3MIrHs)
 
+### NOTION D'EXPLICATION SUR LA CONCEPTION DU SITE
+
+https://oil-sign-428.notion.site/FullStack-0f922f23c26c4482aabe075f895a530e?pvs=4
+
 
 # Getting Started with Create React App
 
@@ -14,10 +18,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
-
-### NOTION D'EXPLICATION 
-
-https://oil-sign-428.notion.site/FullStack-0f922f23c26c4482aabe075f895a530e?pvs=4
 
 (tech utilisé, logique de réfléxion)
 
