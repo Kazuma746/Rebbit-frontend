@@ -3,6 +3,10 @@
 Frontend du projet Rebbit de Amidou DIALLO
 M1 Dev Web - Ynov Campus 2024
 
+Pour pallier aux problèmes de déploiement du site actuellement, j'ai préparé une vidéo de présentation pour vous en donner un aperçu :
+[BackOffice - CRUD](https://youtu.be/iJHcN3MIrHs)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
